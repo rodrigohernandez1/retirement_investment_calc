@@ -1,5 +1,5 @@
 ﻿Básica Inicial: de 16 a 24 años.
-Básica 95-99: de 25 a 39 años.
+Básica 95-99: de 25 a 29 años.
 Básica 90-94: de 30 a 34 años.
 Básica 85-89: de 35 a 39 años.
 Básica 80-84: de 40 a 44 años.
