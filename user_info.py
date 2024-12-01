@@ -1,5 +1,6 @@
 #cargar las librerías que voy a usar durante el proyecto 
 #import yfinance as yf 
+#import datetime as datetime
 
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
@@ -11,19 +12,27 @@ risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 q
 #checar fallas de entrada del 1 al 10 
 
 
-#cargar el archivo de grupos de edad de las 10 diferentes SIENFORES, checar apéndice 1
-with open('src/SIENFORE_groups.txt', 'r', encoding = 'utf-8-sig') as file: #el encoding le quita el "ufeff" de formato que le pone el editor de texto
-    afore_groups = file.read()
-afore_groups = afore_groups.split('\n')
+#cargar el archivo de grupos de rendimientos de las 10 diferentes SIENFORES, checar apéndice 1
+with open('src/SIENFORE_returns.txt', 'r', encoding = 'utf-8-sig') as file: #el encoding le quita el "ufeff" de formato que le pone el editor de texto
+    afore_file = file.read()
+afore_file = afore_file.split('\n')
+
+
+afore_groups = [] #grupos de edad que AFORE categoriza
+afore_returns = [] #retornos por grupo de afore
+for group in afore_file:
+    returns = float(group[-4:])
+    afore_returns.append(returns) #separando los retornos del file de texto original 
+    afore_groups.append(group[0: -6]) #separando el nombre de los distintos grupos del afore, los SIENFOREs
+print(afore_returns)
 print(afore_groups)
 
-age_groups = [] #grupos de edad que AFORE categoriza
-for group in afore_groups:
-    max_age = group[-8:-6] #estos son los lugares de edad máxima en cada lista de las categorias de AFORE
-    min_age = group[-13:-11] #estos son los lugares de edad mínima en cada lista de las categorias de AFORE 
-    age_ranges = (min_age, max_age)
-    age_groups.append(age_ranges)
-print(age_groups)
+
+
+
+
+
+
 
     
 
