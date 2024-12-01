@@ -12,6 +12,9 @@ risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 q
 if risk_opinion < 1 or risk_opinion > 10: 
     risk_opinion = int(input("ingrese una calificación válida del 1 al 10\n"))
 salary = float(input("ingrese su salario mensual\n"))
+#checar fallas de entrada del 1 al 10 
+if salary < 0: 
+    salary = float(input("ingrese un salario válido\n"))
 
 
 salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
