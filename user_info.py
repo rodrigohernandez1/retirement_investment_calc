@@ -11,7 +11,14 @@ risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 q
 #checar fallas de entrada del 1 al 10 
 if risk_opinion < 1 or risk_opinion > 10: 
     risk_opinion = int(input("ingrese una calificación válida del 1 al 10\n"))
+salary = float(input("ingrese su salario mensual"))
 
+
+salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
+max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
+
+########################################################################
+#carga y lectura de archivos del AFORE, y rendimientos de diferentes activos de inverrsión
 #cargar el archivo de grupos de rendimientos promedio en los últimos 5 años de las 10 diferentes SIENFORES del Gobierno de México, checar apéndice 1
 with open('src/SIENFORE_returns.txt', 'r', encoding = 'utf-8-sig') as file: #el encoding le quita el "ufeff" de formato que le pone el editor de texto
     afore_file = file.read()
