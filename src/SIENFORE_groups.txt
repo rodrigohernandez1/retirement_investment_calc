@@ -1,0 +1,10 @@
+﻿Básica Inicial: de 16 a 24 años.
+Básica 95-99: de 25 a 39 años.
+Básica 90-94: de 30 a 34 años.
+Básica 85-89: de 35 a 39 años.
+Básica 80-84: de 40 a 44 años.
+Básica 75-79: de 45 a 49 años.
+Básica 70-74: de 50 a 54 años.
+Básica 65-69: de 55 a 59 años.
+Básica 60-64: de 60 a 64 años.
+Básica de pensiones: de 65 a 99 años.
