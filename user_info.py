@@ -58,11 +58,12 @@ def afore_assignment(age):
     """ 
     for group in afore_ages_dict:
         age_range = afore_ages_dict[group]
-        if age <= age_range[1] and age >= age_range[0]:
+        if age <= age_range[1] and age >= age_range[0]: #busca si la edad está entre el rango de edad de la tupla
             return group
             
     
-print(afore_assignment(42))
+print(afore_assignment(age)) 
+
 
     
 
