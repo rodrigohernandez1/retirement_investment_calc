@@ -23,11 +23,21 @@ for group in afore_file:
     returns = float(group[-4:])
     afore_returns.append(returns) #separando los retornos del file de texto original 
     afore_groups.append(group[0: -6]) #separando el nombre de los distintos grupos del afore, los SIENFOREs
-afore_dict = dict(zip(afore_groups, afore_returns))
+afore_returns_dict = dict(zip(afore_groups, afore_returns)) #unir con zip ambas listas y convertirlas en un diccionario con claves de los nombres de grupos del AFORE y los valores son lso retornos de inversión de cada grupo
 
-with open('src/SIENFORE_groups', 'r', encoding = 'utf-8-sig') as file: 
+#cargar el archivo de grupos de edades de las 10 diferentes SIENFORES del Gobierno de México, checar apéndice 2
+with open('src/SIENFORE_groups.txt', 'r', encoding = 'utf-8-sig') as file: 
     age_groups = file.read()
 age_groups = age_groups.split('\n')
+
+afore_ages = []
+for group in age_groups: 
+    min_age = int(group[-13:-11]) #lugar en cada línea donde se encuntra la edad mínima de ese grupo 
+    max_age = int(group[-8:-6]) #lo mismo con la edad máxima 
+    age_ranges = (min_age, max_age) #utilizo una tupla para que no lo edite con otros procesos 
+    afore_ages.append(age_ranges) #agrego cada rango de edades a una lista 
+
+
 
 
 
