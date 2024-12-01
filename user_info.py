@@ -11,7 +11,7 @@ risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 q
 #checar fallas de entrada del 1 al 10 
 if risk_opinion < 1 or risk_opinion > 10: 
     risk_opinion = int(input("ingrese una calificación válida del 1 al 10\n"))
-salary = float(input("ingrese su salario mensual"))
+salary = float(input("ingrese su salario mensual\n"))
 
 
 salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
@@ -88,7 +88,7 @@ def afore_default_contribution(salary):
     total_contribution = worker_contribution + employer_contribution + government_contribution
     return total_contribution 
 
-print(afore_returns_dict[afore_assignment(age)])
+
 
 
     
