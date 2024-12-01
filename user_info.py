@@ -1,6 +1,5 @@
 #cargar las librerías que voy a usar durante el proyecto 
 #import yfinance as yf 
-#import datetime as datetime
 
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
@@ -25,7 +24,18 @@ for group in afore_file:
     afore_returns.append(returns) #separando los retornos del file de texto original 
     afore_groups.append(group[0: -6]) #separando el nombre de los distintos grupos del afore, los SIENFOREs
 afore_dict = dict(zip(afore_groups, afore_returns))
-print(afore_dict['Básica Inicial'])
+
+with open('src/SIENFORE_groups', 'r', encoding = 'utf-8-sig') as file: 
+    age_groups = file.read()
+age_groups = age_groups.split('\n')
+
+
+
+
+
+    
+
+
 
 
 
