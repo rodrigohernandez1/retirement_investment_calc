@@ -9,6 +9,8 @@ if age < 16 or age >= 99: #la edad es de mínima de 16 ya que es la edad mínima
     age = int(input("ingrese una edad válida del 18 al 64\n"))
 risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 que quiere tomar el MENOR riesgo posible y 10 es que le encanta el riesgo\n"))
 #checar fallas de entrada del 1 al 10 
+if risk_opinion < 1 or risk_opinion > 10: 
+    risk_opinion = int(input("ingrese una calificación válida del 1 al 10\n"))
 
 
 #cargar el archivo de grupos de rendimientos promedio en los últimos 5 años de las 10 diferentes SIENFORES del Gobierno de México, checar apéndice 1
@@ -39,7 +41,17 @@ for group in age_groups:
 
 afore_ages_dict = dict(zip(afore_groups, afore_ages)) #unir con zip la lista de los nombres de los grupos y los rangos de edad de cada SIENFORE (recordar que con SIENFORE me refiero a un grupo de AFORE)
 
+def afore_assignment(age): 
+    for group in afore_ages_dict:
+        age_range = afore_ages_dict[group]
+        if age <= age_range[1] and age >= age_range[0]:
+            return group
+            
+    
 
+print(afore_assignment(42))
+
+    
 
 
 
