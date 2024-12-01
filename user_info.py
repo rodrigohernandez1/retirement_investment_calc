@@ -16,7 +16,6 @@ salary = float(input("ingrese su salario mensual\n"))
 if salary < 0: 
     salary = float(input("ingrese un salario válido\n"))
 
-
 salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
 max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
 
@@ -85,9 +84,9 @@ def afore_default_contribution(salary):
 
     """ 
     bimestral_salary = salary * 2 #el salario bimestral 
-    worker_contribution = salary * 0.01125 #la contribución obligatoria del trabajdor es de 1.125% del salario, y es bimestral 
-    employer_contribution = salary * 0.0515 #contribución del empleador es de 5.15% del salario, vease apéndice 4 
-    government_contribution = salary * 0.00225 #la contribución del goberino sobre tu salario
+    worker_contribution = bimestral_salary * 0.01125 #la contribución obligatoria del trabajdor es de 1.125% del salario, y es bimestral 
+    employer_contribution = bimestral_salary * 0.0515 #contribución del empleador es de 5.15% del salario, vease apéndice 4 
+    government_contribution = bimestral_salary * 0.00225 #la contribución del goberino sobre tu salario
     total_contribution = worker_contribution + employer_contribution + government_contribution
     return total_contribution 
 
