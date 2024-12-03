@@ -10,6 +10,8 @@ day_now = date_now.day
 name = input("ingrese su nombre\n")
 #sacar las variables del día, mes y año de nacimiento
 birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa'))
+age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
+
 birth_month = int(input('Ingresa el número del mes en el cual naciste del 01 al 12 en formato mm'))
 birth_day = int(input(f'¡Fantástico {name}! Ingresa el día en que naciste en formato dd'))
 #validar entradas 
@@ -25,8 +27,6 @@ salary = float(input("ingrese su salario mensual\n"))
 if salary < 0: 
     salary = float(input("ingrese un salario válido\n"))
 
-
-age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
 salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
 max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
 
@@ -143,7 +143,13 @@ def afore_years_left(age):
 
     """ 
     current_group = afore_assignment(age)
-    current_group_age_limit = 0 
+    current_group_age_limit = afore_ages_indexed[current_group][1]
+    whole_years_left = current_group_age_limit - age #número de años enteros que quedan en eset grupo del AFORE 
+    remainding_year = (12 - month_now) / 12 #número de meses enteros sobrantes representado como un fracción del año correinte
+    return whole_years_left + remainding_year 
+
+print(afore_years_left(41))
+
  
 
 
