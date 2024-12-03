@@ -1,5 +1,6 @@
 #cargar las librerías que voy a usar durante el proyecto 
 from datetime import datetime 
+import afore_module_functions as afore
 
 #tomar la fecha de hoy, año, mes y día
 date_now = datetime.now()
@@ -66,25 +67,10 @@ afore_returns_indexed = dict(zip(index, afore_returns))
 afore_ages_indexed = dict(zip(index, afore_ages))
 
 ########################################################################
-#funciones 
-def afore_assignment(age):
-    """
-    Esta función asigna el grupo de SIENFORE en el que se encuentra el usuario dependiendo de su edad 
+#AFORE 
+group_assignment = afore.afore_assignment(42, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
 
-    Parameters
-    ----------
-    age :  int 
-        es la edad del usuario 
 
-    Returns
-    -------
-    el grupo de SIENFORE en el que se encuentra el usuario 
-
-    """ 
-    for group in afore_ages_indexed:
-        age_range = afore_ages_indexed[group]
-        if age <= age_range[1] and age >= age_range[0]: #busca si la edad está entre el rango de edad de la tupla
-            return group
 def afore_default_contribution(salary): 
     """
     Esta función calcula la contribución total al AFORE bimestralmente basada en el salario sin contar las contribuciones voluntarias 
@@ -128,7 +114,7 @@ def interest_period_change(annual_return, months):
     period_rate_percentage = period_rate * 100
     return period_rate_percentage
 
-def afore_years_left(age):
+#def afore_years_left(age):
     """
     Esta función calcula el número de años que te quedan en tu actual fondo del AFORE  
 
@@ -148,7 +134,6 @@ def afore_years_left(age):
     remainding_year = (12 - month_now) / 12 #número de meses enteros sobrantes representado como un fracción del año correinte
     return whole_years_left + remainding_year 
 
-print(afore_years_left(41))
 
  
 
