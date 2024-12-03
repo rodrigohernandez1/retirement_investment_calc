@@ -13,7 +13,6 @@ name = input("ingrese su nombre\n")
 #sacar las variables del día, mes y año de nacimiento
 birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
 age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
-
 birth_month = int(input('Ingresa el número del mes en el cual naciste del 01 al 12 en formato mm\n'))
 birth_day = int(input(f'¡Fantástico {name}! Ingresa el día en que naciste en formato dd\n'))
 #validar entradas 
@@ -69,13 +68,18 @@ afore_ages_indexed = dict(zip(index, afore_ages))
 
 ########################################################################
 #AFORE 
+afore_total = 0 
+
 group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
 bimestral_contribution = afore.afore_default_contribution(salary) #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
-years_left_group = afore.afore_years_left(age, afore_ages_indexed, month_now) #años que quedan en el grupo actua; del AFORE
+months_left_group = afore.afore_months_left(age, afore_ages_indexed, month_now) #años que quedan en el grupo actua; del AFORE
+current_return = afore_returns_indexed[group_assignment]
 
-print(group_assignment)
-print(bimestral_contribution)
-print(years_left_group)
+bimesters_left_group = months_left_group // 2  #medio mes en cada bimestre, las aportaciones al AFORE son bimestrales. Y solo cuento bimestres completos
+
+#asumiré que las aportaciones se hacen al inicio de cada mes impar
+#for i in range()
+
 
 
  
