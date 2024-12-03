@@ -1,5 +1,5 @@
 #cargar las librerías que voy a usar durante el proyecto 
-#import yfinance as yf 
+from datetime import datetime 
 
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
@@ -7,6 +7,7 @@ name = input("ingrese su nombre\n")
 birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa'))
 birth_month = int(input('Ingresa el número del mes en el cual naciste del 01 al 12 en formato mm'))
 birth_day = int(input(f'¡Fantástico {name}! Ingresa el día en que naciste en formato dd'))
+#validar entradas 
 
 
 
