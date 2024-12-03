@@ -49,6 +49,11 @@ for group in age_groups:
 
 afore_ages_dict = dict(zip(afore_groups, afore_ages)) #unir con zip la lista de los nombres de los grupos y los rangos de edad de cada SIENFORE (recordar que con SIENFORE me refiero a un grupo de AFORE)
 
+#index the dictionaries for easier key use
+index = []
+for i in range(len(afore_ages_dict)): 
+    index.append(i)
+
 ########################################################################
 #funciones 
 def afore_assignment(age):
@@ -88,7 +93,11 @@ def afore_default_contribution(salary):
     employer_contribution = bimestral_salary * 0.0515 #contribución del empleador es de 5.15% del salario, vease apéndice 4 
     government_contribution = bimestral_salary * 0.00225 #la contribución del goberino sobre tu salario
     total_contribution = worker_contribution + employer_contribution + government_contribution
-    return total_contribution 
+    return total_contribution
+
+
+
+ 
 
 
 
