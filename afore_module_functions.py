@@ -8,6 +8,8 @@ def afore_assignment(age, afore_dict):
     ----------
     age :  int 
         es la edad del usuario 
+    afore_dict: dict
+        es un diccionario con el rango de edades como valor de el grupo de AFORE como clave. 
 
     Returns
     -------
@@ -18,4 +20,5 @@ def afore_assignment(age, afore_dict):
         age_range = afore_dict[group]
         if age <= age_range[1] and age >= age_range[0]: #busca si la edad está entre el rango de edad de la tupla
             return group
+
         
