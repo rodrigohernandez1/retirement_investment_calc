@@ -16,8 +16,6 @@ birth_day = int(input(f'¡Fantástico {name}! Ingresa el día en que naciste en 
 
 
 
-
-
 risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 que quiere tomar el MENOR riesgo posible y 10 es que le encanta el riesgo\n"))
 #checar fallas de entrada del 1 al 10 
 if risk_opinion < 1 or risk_opinion > 10: 
@@ -27,6 +25,8 @@ salary = float(input("ingrese su salario mensual\n"))
 if salary < 0: 
     salary = float(input("ingrese un salario válido\n"))
 
+
+age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
 salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
 max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
 
