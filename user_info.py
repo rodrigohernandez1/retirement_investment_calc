@@ -3,10 +3,9 @@
 
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
-age = int(input("ingrese su edad como número entero\n"))
 #checar fallas de entrada de edad, 
-if age < 16 or age >= 99: #la edad es de mínima de 16 ya que es la edad mínima para esta en IMSS en México y tomaré 99 como el límite de edad aquí 
-    age = int(input("ingrese una edad válida del 18 al 64\n"))
+birth_year = int(input(f'¿En que año naciste {name}? Ingrese en formato aaaa'))
+
 risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 que quiere tomar el MENOR riesgo posible y 10 es que le encanta el riesgo\n"))
 #checar fallas de entrada del 1 al 10 
 if risk_opinion < 1 or risk_opinion > 10: 
@@ -117,7 +116,22 @@ def interest_period_change(annual_return, months):
     period_rate_percentage = period_rate * 100
     return period_rate_percentage
 
+def afore_years_left(age):
+    """
+    Esta función calcula el número de años que te quedan en tu actual fondo del AFORE  
 
+    Parameters
+    ----------
+    age :  int 
+        edad del usuario
+
+    Returns
+    -------
+    cantidad de años que le quedan en su AFORE 
+
+    """ 
+    current_group = afore_assignment(age)
+    current_group_age_limit = 0 
  
 
 
