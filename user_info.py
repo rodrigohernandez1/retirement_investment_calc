@@ -68,29 +68,9 @@ afore_ages_indexed = dict(zip(index, afore_ages))
 
 ########################################################################
 #AFORE 
-group_assignment = afore.afore_assignment(42, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
+group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
+bimestral_contribution = afore.afore_default_contribution(salary) #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
 
-
-def afore_default_contribution(salary): 
-    """
-    Esta función calcula la contribución total al AFORE bimestralmente basada en el salario sin contar las contribuciones voluntarias 
-
-    Parameters
-    ----------
-    salary :  float 
-        el salario del usuario 
-
-    Returns
-    -------
-    contribución total al AFORE sin contribuciones voluntarias, considerando el trabajdor está dado de alta en el IMSS 
-
-    """ 
-    bimestral_salary = salary * 2 #el salario bimestral 
-    worker_contribution = bimestral_salary * 0.01125 #la contribución obligatoria del trabajdor es de 1.125% del salario, y es bimestral 
-    employer_contribution = bimestral_salary * 0.0515 #contribución del empleador es de 5.15% del salario, vease apéndice 4 
-    government_contribution = bimestral_salary * 0.00225 #la contribución del goberino sobre tu salario
-    total_contribution = worker_contribution + employer_contribution + government_contribution
-    return total_contribution
 def interest_period_change(annual_return, months):
     """
     Esta función cambia el interés anual a interés equivalente compuesto en un periodo diferente al anual.  
