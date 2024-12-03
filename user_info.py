@@ -33,8 +33,6 @@ for group in afore_file:
     afore_returns.append(returns) #separando los retornos del file de texto original 
     afore_groups.append(group[0: -6]) #separando el nombre de los distintos grupos del afore, los SIENFOREs
 
-afore_returns_dict = dict(zip(afore_groups, afore_returns)) #unir con zip ambas listas y convertirlas en un diccionario con claves de los nombres de grupos del AFORE y los valores son lso retornos de inversión de cada grupo
-
 #cargar el archivo de grupos de edades de las 10 diferentes SIENFORES del Gobierno de México, checar apéndice 2
 with open('src/SIENFORE_groups.txt', 'r', encoding = 'utf-8-sig') as file: 
     age_groups = file.read()
@@ -47,16 +45,14 @@ for group in age_groups:
     age_ranges = (min_age, max_age) #utilizo una tupla para que no lo edite con otros procesos 
     afore_ages.append(age_ranges) #agrego cada rango de edades a una lista 
 
-afore_ages_dict = dict(zip(afore_groups, afore_ages)) #unir con zip la lista de los nombres de los grupos y los rangos de edad de cada SIENFORE (recordar que con SIENFORE me refiero a un grupo de AFORE)
 
 #indexar los diccionarios para que sean más fáciles de usar 
 index = []
-for i in range(len(afore_returns_dict)): 
+for i in range(len(afore_groups)): 
     index.append(i)
 afore_returns_indexed = dict(zip(index, afore_returns))
 #usare la mimsa lista de index ya que los diccionarios tienen el mismo número de claves
 afore_ages_indexed = dict(zip(index, afore_ages))
-print(afore_ages_indexed)
 
 ########################################################################
 #funciones 
@@ -74,8 +70,8 @@ def afore_assignment(age):
     el grupo de SIENFORE en el que se encuentra el usuario 
 
     """ 
-    for group in afore_ages_dict:
-        age_range = afore_ages_dict[group]
+    for group in afore_ages_indexed:
+        age_range = afore_ages_indexed[group]
         if age <= age_range[1] and age >= age_range[0]: #busca si la edad está entre el rango de edad de la tupla
             return group
 def afore_default_contribution(salary): 
@@ -123,8 +119,6 @@ def interest_period_change(annual_return, months):
 
 
  
-
-
 
 
     
