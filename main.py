@@ -2,19 +2,20 @@
 from datetime import datetime 
 import afore_module_functions as afore
 
-#tomar la fecha de hoy, año, mes y día
+#tomar la fecha de hoy: año, mes y día
 date_now = datetime.now()
 year_now = date_now.year
 month_now = date_now.month
 day_now = date_now.day
+
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
 #sacar las variables del día, mes y año de nacimiento
-birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa'))
+birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
 age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
 
-birth_month = int(input('Ingresa el número del mes en el cual naciste del 01 al 12 en formato mm'))
-birth_day = int(input(f'¡Fantástico {name}! Ingresa el día en que naciste en formato dd'))
+birth_month = int(input('Ingresa el número del mes en el cual naciste del 01 al 12 en formato mm\n'))
+birth_day = int(input(f'¡Fantástico {name}! Ingresa el día en que naciste en formato dd\n'))
 #validar entradas 
 
 
@@ -70,49 +71,11 @@ afore_ages_indexed = dict(zip(index, afore_ages))
 #AFORE 
 group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
 bimestral_contribution = afore.afore_default_contribution(salary) #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
+years_left_group = afore.afore_years_left(age, afore_ages_indexed, month_now) #años que quedan en el grupo actua; del AFORE
 
-def interest_period_change(annual_return, months):
-    """
-    Esta función cambia el interés anual a interés equivalente compuesto en un periodo diferente al anual.  
-
-    Parameters
-    ----------
-    annual_return :  float 
-        el retorno anual que quiere ser convertido a otro periodo, expresado como porcentaje (5.7% se escribe sin el signo: 5.7) 
-    months: int
-        los meses al cual el interés será convertido. 
-
-    Returns
-    -------
-    period_rate convertido compuesto 
-
-    """ 
-    base = 100
-    final = 100 * (1 + (annual_return/100))
-    period_fraction = 12 / months #la fracción del periodo con relación a un año, si el periodo son 2 meses, la fracción es 1/6 ya que hay 6 bimestres en el año
-    period_rate = (final/base)**(1/period_fraction) - 1
-    period_rate_percentage = period_rate * 100
-    return period_rate_percentage
-
-#def afore_years_left(age):
-    """
-    Esta función calcula el número de años que te quedan en tu actual fondo del AFORE  
-
-    Parameters
-    ----------
-    age :  int 
-        edad del usuario
-
-    Returns
-    -------
-    cantidad de años que le quedan en su AFORE 
-
-    """ 
-    current_group = afore_assignment(age)
-    current_group_age_limit = afore_ages_indexed[current_group][1]
-    whole_years_left = current_group_age_limit - age #número de años enteros que quedan en eset grupo del AFORE 
-    remainding_year = (12 - month_now) / 12 #número de meses enteros sobrantes representado como un fracción del año correinte
-    return whole_years_left + remainding_year 
+print(group_assignment)
+print(bimestral_contribution)
+print(years_left_group)
 
 
  
