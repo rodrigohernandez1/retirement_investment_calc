@@ -3,11 +3,12 @@
 
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
-birth_date = input(f'¿En que fecha naciste {name}? Ingrese en formato dd/mm/aaaa\n')
-#checar fallas de entrada de fecha de nacimiento
-if len(birth_date) != 10:
-    birth_date = input("Ingrese su fecha de nacimiento en formato válido dd/mm/aaaa por favor")
- 
+#sacar las variables del día, mes y año de nacimiento
+birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa'))
+birth_month = int(input('Ingresa el número del mes en el cual naciste del 01 al 12 en formato mm'))
+birth_day = int(input(f'¡Fantástico {name}! Ingresa el día en que naciste en formato dd'))
+
+
 
 
 
