@@ -4,7 +4,7 @@
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
 #checar fallas de entrada de edad, 
-birth_year = int(input(f'¿En que año naciste {name}? Ingrese en formato aaaa'))
+birth_year = input(f'¿En que fecha naciste {name}? Ingrese en formato dd/mm/aaaa\n')
 
 risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 que quiere tomar el MENOR riesgo posible y 10 es que le encanta el riesgo\n"))
 #checar fallas de entrada del 1 al 10 
