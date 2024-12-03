@@ -55,7 +55,7 @@ def afore_years_left(age, afore_dict, month_now):
 
     Returns
     -------
-    cantidad de años que le quedan en su AFORE 
+    cantidad de años que le quedan en su actual grupo de AFORE 
 
     """ 
     current_group = afore_assignment(age, afore_dict)
