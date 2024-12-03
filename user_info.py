@@ -49,10 +49,14 @@ for group in age_groups:
 
 afore_ages_dict = dict(zip(afore_groups, afore_ages)) #unir con zip la lista de los nombres de los grupos y los rangos de edad de cada SIENFORE (recordar que con SIENFORE me refiero a un grupo de AFORE)
 
-#index the dictionaries for easier key use
+#indexar los diccionarios para que sean más fáciles de usar 
 index = []
-for i in range(len(afore_ages_dict)): 
+for i in range(len(afore_returns_dict)): 
     index.append(i)
+afore_returns_indexed = dict(zip(index, afore_returns))
+#usare la mimsa lista de index ya que los diccionarios tienen el mismo número de claves
+afore_ages_indexed = dict(zip(index, afore_ages))
+print(afore_ages_indexed)
 
 ########################################################################
 #funciones 
