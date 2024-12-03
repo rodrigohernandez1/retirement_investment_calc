@@ -58,7 +58,7 @@ def afore_years_left(age, afore_dict, month_now):
     cantidad de años que le quedan en su AFORE 
 
     """ 
-    current_group = afore_assignment(age)
+    current_group = afore_assignment(age, afore_dict)
     current_group_age_limit = afore_dict[current_group][1]
     whole_years_left = current_group_age_limit - age #número de años enteros que quedan en eset grupo del AFORE 
     remainding_year = (12 - month_now) / 12 #número de meses enteros sobrantes representado como un fracción del año correinte
