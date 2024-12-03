@@ -40,5 +40,28 @@ def afore_default_contribution(salary):
     government_contribution = bimestral_salary * 0.00225 #la contribución del goberino sobre tu salario
     total_contribution = worker_contribution + employer_contribution + government_contribution
     return total_contribution
+def afore_years_left(age, afore_dict, month_now):
+    """
+    Esta función calcula el número de años que te quedan en tu actual fondo del AFORE  
+
+    Parameters
+    ----------
+    age :  int 
+        edad del usuario
+    afore_dict: dict
+        es un diccionario con el rango de edades como valor de el grupo de AFORE como clave.
+    month_now: int
+        el mes en el que estamos actualmente
+
+    Returns
+    -------
+    cantidad de años que le quedan en su AFORE 
+
+    """ 
+    current_group = afore_assignment(age)
+    current_group_age_limit = afore_dict[current_group][1]
+    whole_years_left = current_group_age_limit - age #número de años enteros que quedan en eset grupo del AFORE 
+    remainding_year = (12 - month_now) / 12 #número de meses enteros sobrantes representado como un fracción del año correinte
+    return whole_years_left + remainding_year 
 
         
