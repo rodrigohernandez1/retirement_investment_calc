@@ -1,6 +1,11 @@
 #cargar las librerías que voy a usar durante el proyecto 
 from datetime import datetime 
 
+#tomar la fecha de hoy, año, mes y día
+date_now = datetime.now()
+year_now = date_now.year
+month_now = date_now.month
+day_now = date_now.day
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
 #sacar las variables del día, mes y año de nacimiento
