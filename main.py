@@ -83,8 +83,30 @@ current_bimestral_return = interest.interest_period_change(current_annual_return
 for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
     afore_total += bimestral_contribution * ((1 + current_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
 
-group_assignment += 1 # moverte al sigiente grupo 
-bimestral_contribution 
+print(afore_total)
+
+while group_assignment <= 7:  
+    group_assignment += 1 # moverte al sigiente grupo
+    
+    beggining_principal = afore_total #principal al principio de el periodo 
+    new_annual_return = afore_returns_indexed[group_assignment] #retorno anual del siguiente grupo del AFORE
+    new_bimestral_return = interest.interest_period_change(new_annual_return, 2) #nuevo interés bimestral 
+
+    gained_on_principal = beggining_principal * ((1 + new_annual_return/100) ** 5) #cinco años compuesto 
+    bimesters_left_group = 5 * 6 #5 años por grupo después del primero (Básica Inicial) y 6 bimestres por año 
+    bimestral_gain = 0 
+    for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
+        bimestral_gain += bimestral_contribution * ((1 + new_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
+    
+    afore_total = gained_on_principal + bimestral_gain 
+    
+    print(gained_on_principal)
+    print(bimestral_gain)
+    print(afore_total)
+
+print(new_annual_return)
+print(afore_total)
+
 
 
 
