@@ -59,14 +59,14 @@ if opcion_age == 1:
         age = year_now - birth_year
     while age < 16: 
         birth_year = int(input('Tienes que tener 16 años mínimo para empezar a trabajar en México formalmente, favor de ingresar un año válido'))
-        age = year_now - birth_year 
-    salary = float(input("ingrese su salario mensual\n"))
-    #checar fallas de entrada 
-    if salary < 0: 
-        salary = float(input("ingrese un salario válido\n"))
-    elif salary > max_aportacion: #topando la aportación a un máximo de 23 salarios mínimos
+        age = year_now - birth_year     
+    try: 
+        salary = float(input("ingrese su salario mensual\n"))
+    #checar fallas de entrada
+    except ValueError as e: 
+        print(f"Error : {e}") #error si salario es menor o igual a 0  
+    if salary > max_aportacion: #topando la aportación a un máximo de 23 salarios mínimos
         salary = max_aportacion
-    
     afore_total = 0 
     group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
     bimestral_contribution = afore.afore_default_contribution(salary) #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
@@ -114,11 +114,12 @@ elif opcion_age == 2:
     birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
     current_age = year_now - birth_year
     month_begin = int(input('en que mes empezó a trabajar en formato mm\n'))
-    salary = float(input("ingrese su salario mensual\n"))
+    try: 
+        salary = float(input("ingrese su salario mensual\n"))
     #checar fallas de entrada 
-    if salary < 0: 
-        salary = float(input("ingrese un salario válido\n"))
-    elif salary > max_aportacion: 
+    except ValueError as e: 
+        print(f'Error : {e}')
+    if salary > max_aportacion: 
         salary = max_aportacion
     
     afore_total = 0 

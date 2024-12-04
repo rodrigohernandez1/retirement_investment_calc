@@ -34,12 +34,15 @@ def afore_default_contribution(salary):
     contribución total al AFORE sin contribuciones voluntarias, considerando el trabajdor está dado de alta en el IMSS 
 
     """ 
+    if salary <= 0:
+         raise ValueError('salary has to be more than 0')
     bimestral_salary = salary * 2 #el salario bimestral 
     worker_contribution = bimestral_salary * 0.01125 #la contribución obligatoria del trabajdor es de 1.125% del salario, y es bimestral 
     employer_contribution = bimestral_salary * 0.0515 #contribución del empleador es de 5.15% del salario, vease apéndice 4 
     government_contribution = bimestral_salary * 0.00225 #la contribución del goberino sobre tu salario
     total_contribution = worker_contribution + employer_contribution + government_contribution
     return total_contribution
+
 def afore_months_left(age, afore_dict, month_now):
     """
     Esta función calcula el número de años que te quedan en tu actual fondo del AFORE  
