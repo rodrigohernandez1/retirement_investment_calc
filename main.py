@@ -60,11 +60,13 @@ if opcion_age == 1:
     while age < 16: 
         birth_year = int(input('Tienes que tener 16 años mínimo para empezar a trabajar en México formalmente, favor de ingresar un año válido'))
         age = year_now - birth_year     
+    
     try: 
         salary = float(input("ingrese su salario mensual\n"))
     #checar fallas de entrada
     except ValueError as e: 
         print(f"Error : {e}") #error si salario es menor o igual a 0  
+    
     if salary > max_aportacion: #topando la aportación a un máximo de 23 salarios mínimos
         salary = max_aportacion
     afore_total = 0 
@@ -157,4 +159,3 @@ elif opcion_age == 2:
     
     print(f'Actualmente te encuentras en el grupo de {afore_groups[current_group]}. El cual tiene un rendimiento anual promedio de {current_return}%')
     print(f'Asumiendo que tu ingreso aumente con relación a la inflación, al cumplir los 65 años te retirarás con ${afore_total}MXN')
-
