@@ -74,7 +74,11 @@ if opcion_age == 1:
 
     current_annual_return = afore_returns_indexed[group_assignment]
     bimesters_left_group = months_left_current_group // 2  #medio mes en cada bimestre, las aportaciones al AFORE son bimestrales. Y solo cuento bimestres completos
-    current_bimestral_return = interest.interest_period_change(current_annual_return, 2)
+    
+    try: 
+        current_bimestral_return = interest.interest_period_change(current_annual_return, 2)
+    except ValueError as e: #la e representa la forma convencional de escribir el error: soltará el raise ValueError de la función en caso que motnhs == 0 
+        print(f'Error: {e}')
 
     #asumiré que las aportaciones se hacen al inicio después de cada bimestre de trabajo. Ejemplo si se trabajo ENERO y FEBREO entonces la aportación se hace el 5 de Marzo.
     for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
