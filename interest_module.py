@@ -15,6 +15,8 @@ def interest_period_change(annual_return, months):
     period_rate convertido compuesto 
 
     """ 
+    if months == 0: 
+        raise ValueError("months tiene que ser mayor que 0") 
     base = 100
     final = 100 * (1 + (annual_return/100))
     period_fraction = 12 / months #la fracción del periodo con relación a un año, si el periodo son 2 meses, la fracción es 1/6 ya que hay 6 bimestres en el año
