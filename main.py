@@ -72,21 +72,19 @@ afore_ages_indexed = dict(zip(index, afore_ages))
 afore_total = 0 
 
 group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
-bimestral_contribution = afore.afore_default_contribution(salary) / 2 #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
-months_left_group = afore.afore_months_left(age, afore_ages_indexed, month_now) #años que quedan en el grupo actua; del AFORE
+bimestral_contribution = afore.afore_default_contribution(salary) #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
+months_left_current_group = afore.afore_months_left(age, afore_ages_indexed, month_now) #años que quedan en el grupo actua; del AFORE
 
 current_annual_return = afore_returns_indexed[group_assignment]
-bimesters_left_group = months_left_group #// 2  #medio mes en cada bimestre, las aportaciones al AFORE son bimestrales. Y solo cuento bimestres completos
+bimesters_left_group = months_left_current_group // 2  #medio mes en cada bimestre, las aportaciones al AFORE son bimestrales. Y solo cuento bimestres completos
 current_bimestral_return = interest.interest_period_change(current_annual_return, 2)
 
-print(current_annual_return)
-print(bimestral_contribution)
-print(bimesters_left_group)
-print(current_bimestral_return)
 #asumiré que las aportaciones se hacen al inicio después de cada bimestre de trabajo. Ejemplo si se trabajo ENERO y FEBREO entonces la aportación se hace el 5 de Marzo.
 for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
-    afore_total += bimestral_contribution * ((1 + 0.490833333/100) ** t) #formúla de interés compuesto cada bimestre
-print(afore_total)
+    afore_total += bimestral_contribution * ((1 + current_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
+
+group_assignment += 1 # moverte al sigiente grupo 
+bimestral_contribution 
 
 
 
