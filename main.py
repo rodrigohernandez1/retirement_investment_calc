@@ -46,7 +46,10 @@ if opcion == 1:
     afore_ages_indexed = dict(zip(index, afore_ages))
     
     #opcion de calcular tus rendimientos desde hoy o desde que empezaste a trabajar
-    opcion_age = int(input('Elige como quieres calcular tu retiro del AFORE:\n 1. Contar mis aportaciones desde hoy\n 2. Contar aportaciones desde que empecé a trabajar\n'))
+    opcion_age = int(input('Elige como quieres calcular tu retiro del AFORE:\n1. Contar mis aportaciones desde hoy\n2. Contar aportaciones desde que empecé a trabajar\n'))
+    salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
+    max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
+    
     if opcion_age == 1: 
         #sacar las variables del año de nacimiento 
         birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
@@ -62,6 +65,8 @@ if opcion == 1:
         #checar fallas de entrada 
         if salary < 0: 
             salary = float(input("ingrese un salario válido\n"))
+        elif salary > max_aportacion: 
+            salary = max_aportacion
         
         afore_total = 0 
         group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
@@ -108,6 +113,8 @@ if opcion == 1:
         #checar fallas de entrada 
         if salary < 0: 
             salary = float(input("ingrese un salario válido\n"))
+        elif salary > max_aportacion: 
+            salary = max_aportacion
         
         afore_total = 0 
         group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE que primero tuvo el usuario cuando empezó a trabajar 
@@ -144,9 +151,7 @@ if opcion == 1:
         
         print(f'Actualmente te encuentras en el grupo de {afore_groups[current_group]}. El cual tiene un rendimiento anual promedio de {current_return}%')
         print(f'Asumiendo que tu ingreso aumente con relación a la inflación, al cumplir los 65 años te retirarás con ${afore_total}MXN')
-    
-    salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
-    max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
+
 
 
     
