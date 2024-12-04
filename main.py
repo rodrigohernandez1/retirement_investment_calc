@@ -22,10 +22,6 @@ while age >= 65:
 while age < 16: 
     birth_year = int(input('Tienes que tener 16 años mínimo para empezar a trabajar en México formalmente, favor de ingresar un año válido'))
     age = year_now - birth_year 
-
-
-
-
 risk_opinion = int(input("del uno al 10 cálifique su tolerancía al riesgo, 1 que quiere tomar el MENOR riesgo posible y 10 es que le encanta el riesgo\n"))
 #checar fallas de entrada del 1 al 10 
 if risk_opinion < 1 or risk_opinion > 10: 
@@ -40,6 +36,7 @@ max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE
 
 ########################################################################
 #carga y lectura de archivos del AFORE, y rendimientos de diferentes activos de inverrsión
+
 #cargar el archivo de grupos de rendimientos promedio en los últimos 5 años de las 10 diferentes SIENFORES del Gobierno de México, checar apéndice 1
 with open('src/SIENFORE_returns.txt', 'r', encoding = 'utf-8-sig') as file: #el encoding le quita el "ufeff" de formato que le pone el editor de texto
     afore_file = file.read()
@@ -105,8 +102,8 @@ while group_assignment <= 7:
     
     afore_total = gained_on_principal + bimestral_gain 
 
-
-print(f'Contando las aportaciones desde hoy, al cumplir los 65 años te retirarás con {afore_total}')
+afore_total = round(afore_total, 2)
+print(f'Asumiendo su ingreso aumente con relación a la inflación y contando las aportaciones desde hoy, al cumplir los 65 años te retirarás con {afore_total}')
 
 
 
