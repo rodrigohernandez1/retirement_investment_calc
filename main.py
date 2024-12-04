@@ -44,10 +44,10 @@ afore_returns_indexed = dict(zip(index, afore_returns))
 #usare la mimsa lista de index ya que los diccionarios tienen el mismo número de claves
 afore_ages_indexed = dict(zip(index, afore_ages))
 
-#opcion de calcular tus rendimientos desde hoy o desde que empezaste a trabajar
-opcion_age = int(input('Elige como quieres calcular tu retiro del AFORE:\n1. Contar mis aportaciones desde hoy\n2. Contar aportaciones desde que empecé a trabajar\n'))
 salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
 max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
+#opcion de calcular tus rendimientos desde hoy o desde que empezaste a trabajar
+opcion_age = int(input('Elige como quieres calcular tu retiro del AFORE:\n1. Contar mis aportaciones desde hoy\n2. Contar aportaciones desde que empecé a trabajar\n'))
 
 if opcion_age == 1: 
     #sacar las variables del año de nacimiento 
@@ -105,6 +105,8 @@ if opcion_age == 1:
 
 elif opcion_age == 2:
     age = int(input('ingrese la edad con la que empezó a trabajar\n'))
+    while age >= 65 or age < 16: 
+        age  = int(input('Esta calculadora no acepta edades mayores que 64 años, ni menores de 16. Por favor ingrese una edad válida'))
     birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
     current_age = year_now - birth_year
     month_begin = int(input('en que mes empezó a trabajar en formato mm\n'))
