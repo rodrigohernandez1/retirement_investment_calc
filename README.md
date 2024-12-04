@@ -1,17 +1,34 @@
-# afore_retirement_investment_calc
-Investment for retirement calculator for mexicans using the average AFORE annual returnsfrom the last 5 years and changing the rates based on the user's age, as with a higher age the AFORE group investmest more securely and therefore returns vary with age. 
+# AFORE Retirement Investment Calculator
 
-A calculator designed to estimate the amount you'll have in retirement based on average AFORE annual returns from the past five years. This tool considers the user's age to adjust projected returns, as AFORE groups tend to invest more conservatively as you get older, impacting returns. It also takes into account the average monthly salary of the user and calculates the contribution based on bimestral deposits from the government, employer and employee. 
+This Python project calculates the estimated amount a user will have at retirement based on their AFORE (Administradoras de Fondos para el Retiro) investments in Mexico. The calculation accounts for:
+
+- Average AFORE returns over the last five years.
+- Changes in AFORE investment strategies as users age (e.g., less risky investments for older users).
+- User-specific details such as salary and starting age of work.
+
+This is my first self-directed Python project, designed to showcase problem-solving, Python programming, and domain-specific knowledge in retirement planning in Mexico.
 
 ## Features
-- 📊 **Dynamic Projections:** Calculates future retirement savings based on different AFORE group returns. 
-- 🔄 **Age-Based Adjustments:** Adapts returns according to user age, reflecting the change in risk that AFORE is designed to do. 
-- 🇲🇽 **Made for Mexico:** Made for the Mexican AFORE system. 
+- Flexible input options: Users can choose to start their retirement calculations from today or from when they began working.
+- Accurate compaund interest calculation: Utilizes AFORE returns and age-based investment groupings to project compaunded returns over time. 
+- Detailed outputs: Provides users with a breakdown of their current investment group, annual returns, and total projected retirement savings.
+
+## Concepts and Libraries Used
+Programming Concepts
+- Loops: For processing data files and iterating over periods for compound interest calculations.
+- Functions: Custom functions in external modules for assigning AFORE groups, calculating default contributions, and determining time periods.
+- Modules: Code is modularized with custom Python modules (afore_module_functions, interest_module) for reusability and clarity.
+- Dictionaries: Used for efficient indexing of AFORE groups and returns.
+- File Handling: Reads and processes real-world data stored in .txt files.
+- Error Handling: Validates user inputs to ensure robust operation.
+Libraries
+- datetime: Extracts and utilizes the current date for precise age and time calculations.
 
 ## How It Works
-1. The user inputs:
-   - Current age
-   - Current monthly salary 
-   - Expected retirement age is 65 
-2. The calculator uses historical AFORE data and compaunds the bimestral contributions over time/
-3. Outputs the projected retirement savings at 65 y/o. 
+1. The user inputs basic details such as name, birth year, salary, and starting age of work.
+2. The program:
+- Assigns the user to an AFORE group based on their age.
+- Calculates contributions and compound interest for the remaining time in each group.
+- Moves the user through successive AFORE groups, adjusting returns accordingly.
+The total projected retirement savings are displayed based on the user's details.
+
