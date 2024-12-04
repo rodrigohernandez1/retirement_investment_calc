@@ -83,7 +83,6 @@ current_bimestral_return = interest.interest_period_change(current_annual_return
 for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
     afore_total += bimestral_contribution * ((1 + current_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
 
-print(afore_total)
 
 while group_assignment <= 7:  
     group_assignment += 1 # moverte al sigiente grupo
