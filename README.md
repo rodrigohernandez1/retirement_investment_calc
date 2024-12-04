@@ -6,7 +6,7 @@ This Python project calculates the estimated amount a user will have at retireme
 - Changes in AFORE investment strategies as users age (e.g., less risky investments for older users).
 - User-specific details such as salary and starting age of work.
 
-This is my first self-directed Python project, designed to showcase problem-solving, Python programming, and domain-specific knowledge in retirement planning in Mexico.
+This is my first self-directed Python project, designed to showcase problem-solving, Python programming, and domain-specific knowledge in how interest compunds over time. 
 
 ## Features
 - Flexible input options: Users can choose to start their retirement calculations from today or from when they began working.
