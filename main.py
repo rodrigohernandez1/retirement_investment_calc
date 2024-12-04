@@ -11,12 +11,12 @@ day_now = date_now.day
 
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
+
 #sacar las variables del día, mes y año de nacimiento
 birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
 age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
-birth_month = int(input('Ingresa el número del mes en el cual naciste del 01 al 12 en formato mm\n'))
-birth_day = int(input(f'¡Fantástico {name}! Ingresa el día en que naciste en formato dd\n'))
 #validar entradas 
+
 
 
 
@@ -100,6 +100,7 @@ while group_assignment <= 7:
     afore_total = gained_on_principal + bimestral_gain 
 
 
+print(afore_total)
 
 
 
@@ -134,5 +135,3 @@ while group_assignment <= 7:
 
 
 
-
-# %%
