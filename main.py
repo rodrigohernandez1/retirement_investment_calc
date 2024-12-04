@@ -11,7 +11,7 @@ day_now = date_now.day
 
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
-opcion = int(input(f'¡Bienvenido {name}! Por favor elige una opción:\n1. Calcula tu retiro: AFORE para la jubilación\n2. Calculadora libre: calcula interés compuesto y el valor del dinero a través del tiempo\n3. Recomendación del retiro: calcula cuanto es nesario invertir para retirarte dignamente'))
+opcion = int(input(f'¡Bienvenido {name}! Por favor elige una opción:\n1. Calcula tu retiro: AFORE para la jubilación\n2. Calculadora libre: calcula interés compuesto y el valor del dinero a través del tiempo\n3. Recomendación del retiro: calcula cuanto es nesario invertir para retirarte dignamente\n'))
 if opcion == 1:
     #sacar las variables del día, mes y año de nacimiento
     birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
@@ -83,6 +83,7 @@ if opcion == 1:
     for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
         afore_total += bimestral_contribution * ((1 + current_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
 
+    original_group = group_assignment
 
     while group_assignment <= 7:  
         group_assignment += 1 # moverte al sigiente grupo
@@ -100,40 +101,8 @@ if opcion == 1:
         afore_total = gained_on_principal + bimestral_gain 
 
     afore_total = round(afore_total, 2)
-    print(f'Asumiendo su ingreso aumente con relación a la inflación y contando las aportaciones desde hoy, al cumplir los 65 años te retirarás con {afore_total}')
-
-
-
-
-
- 
-
-
     
-
-
-
-
-
-
+    print(f'Actualmente te encuentras en el grupo de {afore_groups[original_group]}. El cual tiene un rendimiento anual promedio de {current_annual_return}%')
+    print(f'Asumiendo que tu ingreso aumente con relación a la inflación y contando las aportaciones desde hoy, al cumplir los 65 años te retirarás con ${afore_total}MXN')
     
-
-
-
-
-
-
-
-
-
-
     
-
-
-
-
-
-
-
-
-
