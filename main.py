@@ -13,27 +13,6 @@ day_now = date_now.day
 name = input("ingrese su nombre\n")
 opcion = int(input(f'¡Bienvenido {name}! Por favor elige una opción:\n1. Calcula tu retiro: AFORE para la jubilación\n2. Calculadora libre: calcula interés compuesto y el valor del dinero a través del tiempo\n3. Recomendación del retiro: calcula cuanto es nesario invertir para retirarte dignamente\n'))
 if opcion == 1:
-    #sacar las variables del día, mes y año de nacimiento
-    birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
-    age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
-    #validar entradas 
-    while age >= 65: 
-        birth_year = int(input('Esta calculadora no acepta edades mayores que 64 años, lo sentimos. Por favor ingrese una edad válida'))
-        age = year_now - birth_year
-    while age < 16: 
-        birth_year = int(input('Tienes que tener 16 años mínimo para empezar a trabajar en México formalmente, favor de ingresar un año válido'))
-        age = year_now - birth_year 
-    salary = float(input("ingrese su salario mensual\n"))
-    #checar fallas de entrada del 1 al 10 
-    if salary < 0: 
-        salary = float(input("ingrese un salario válido\n"))
-
-    salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
-    max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
-
-    ########################################################################
-    #carga y lectura de archivos del AFORE, y rendimientos de diferentes activos de inverrsión
-
     #cargar el archivo de grupos de rendimientos promedio en los últimos 5 años de las 10 diferentes SIENFORES del Gobierno de México, checar apéndice 1
     with open('src/SIENFORE_returns.txt', 'r', encoding = 'utf-8-sig') as file: #el encoding le quita el "ufeff" de formato que le pone el editor de texto
         afore_file = file.read()
@@ -58,7 +37,6 @@ if opcion == 1:
         age_ranges = (min_age, max_age) #utilizo una tupla para que no lo edite con otros procesos 
         afore_ages.append(age_ranges) #agrego cada rango de edades a una lista 
 
-
     #indexar los diccionarios para que sean más fáciles de usar 
     index = []
     for i in range(len(afore_groups)): 
@@ -66,6 +44,29 @@ if opcion == 1:
     afore_returns_indexed = dict(zip(index, afore_returns))
     #usare la mimsa lista de index ya que los diccionarios tienen el mismo número de claves
     afore_ages_indexed = dict(zip(index, afore_ages))
+    
+    #opcion de calcular tus rendimientos desde hoy o desde que empezaste a trabajar
+    opcion_age = int(input('Elige como quieres calcular tu retiro del AFORE:\n 1. Contar mis aportaciones desde hoy\n 2. Contar aportaciones desde que empecé a trabajar\n'))
+    if opcion_age == 1: 
+        #sacar las variables del año de nacimiento 
+        birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
+        age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
+        #validar entradas 
+        while age >= 65: 
+            birth_year = int(input('Esta calculadora no acepta edades mayores que 64 años, lo sentimos. Por favor ingrese una edad válida'))
+            age = year_now - birth_year
+        while age < 16: 
+            birth_year = int(input('Tienes que tener 16 años mínimo para empezar a trabajar en México formalmente, favor de ingresar un año válido'))
+            age = year_now - birth_year 
+    elif opcion_age == 2:
+        age = int(input('ingrese la edad con la que empezó a trabajar'))
+    salary = float(input("ingrese su salario mensual\n"))
+    #checar fallas de entrada 
+    if salary < 0: 
+        salary = float(input("ingrese un salario válido\n"))
+
+    salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
+    max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
 
     ########################################################################
     #AFORE 
