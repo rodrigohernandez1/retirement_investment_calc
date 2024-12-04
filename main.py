@@ -11,7 +11,7 @@ day_now = date_now.day
 
 #preguntar por los datos del usuario 
 name = input("ingrese su nombre\n")
-opcion = int(input(f"Bienvenido {name}! Por favor elige una opción:\n1. Calcula tu retiro AFORE\n2. Calcula Interés Compuesto\n3. Calcula inversión para jubilarte"))
+opcion = int(input(f'¡Bienvenido {name}! Por favor elige una opción:\n1. Calcula tu retiro: AFORE para la jubilación\n2. Calculadora libre: calcula interés compuesto y el valor del dinero a través del tiempo\n3. Recomendación del retiro: calcula cuanto es nesario invertir para retirarte dignamente'))
 
 #sacar las variables del día, mes y año de nacimiento
 birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
