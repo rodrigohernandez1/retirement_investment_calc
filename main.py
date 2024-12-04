@@ -58,52 +58,96 @@ if opcion == 1:
         while age < 16: 
             birth_year = int(input('Tienes que tener 16 años mínimo para empezar a trabajar en México formalmente, favor de ingresar un año válido'))
             age = year_now - birth_year 
-    elif opcion_age == 2:
-        age = int(input('ingrese la edad con la que empezó a trabajar'))
-    salary = float(input("ingrese su salario mensual\n"))
-    #checar fallas de entrada 
-    if salary < 0: 
-        salary = float(input("ingrese un salario válido\n"))
+        salary = float(input("ingrese su salario mensual\n"))
+        #checar fallas de entrada 
+        if salary < 0: 
+            salary = float(input("ingrese un salario válido\n"))
+        
+        afore_total = 0 
+        group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
+        bimestral_contribution = afore.afore_default_contribution(salary) #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
+        months_left_current_group = afore.afore_months_left(age, afore_ages_indexed, month_now) #años que quedan en el grupo actua; del AFORE
 
+        current_annual_return = afore_returns_indexed[group_assignment]
+        bimesters_left_group = months_left_current_group // 2  #medio mes en cada bimestre, las aportaciones al AFORE son bimestrales. Y solo cuento bimestres completos
+        current_bimestral_return = interest.interest_period_change(current_annual_return, 2)
+
+        #asumiré que las aportaciones se hacen al inicio después de cada bimestre de trabajo. Ejemplo si se trabajo ENERO y FEBREO entonces la aportación se hace el 5 de Marzo.
+        for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
+            afore_total += bimestral_contribution * ((1 + current_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
+
+        original_group = group_assignment
+
+        while group_assignment <= 7:  
+            group_assignment += 1 # moverte al sigiente grupo
+            
+            beggining_principal = afore_total #principal al principio de el periodo 
+            new_annual_return = afore_returns_indexed[group_assignment] #retorno anual del siguiente grupo del AFORE
+            new_bimestral_return = interest.interest_period_change(new_annual_return, 2) #nuevo interés bimestral 
+
+            gained_on_principal = beggining_principal * ((1 + new_annual_return/100) ** 5) #cinco años compuesto 
+            bimesters_left_group = 5 * 6 #5 años por grupo después del primero (Básica Inicial) y 6 bimestres por año 
+            bimestral_gain = 0 
+            for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
+                bimestral_gain += bimestral_contribution * ((1 + new_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
+            
+            afore_total = gained_on_principal + bimestral_gain 
+
+        afore_total = round(afore_total, 2)
+        
+        print(f'Actualmente te encuentras en el grupo de {afore_groups[original_group]}. El cual tiene un rendimiento anual promedio de {current_annual_return}%')
+        print(f'Asumiendo que tu ingreso aumente con relación a la inflación y contando las aportaciones desde hoy, al cumplir los 65 años te retirarás con ${afore_total}MXN')
+    
+    
+    elif opcion_age == 2:
+        age = int(input('ingrese la edad con la que empezó a trabajar\n'))
+        birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
+        current_age = year_now - birth_year
+        month_begin = int(input('en que mes empezó a trabajar en formato mm\n'))
+        salary = float(input("ingrese su salario mensual\n"))
+        #checar fallas de entrada 
+        if salary < 0: 
+            salary = float(input("ingrese un salario válido\n"))
+        
+        afore_total = 0 
+        group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE que primero tuvo el usuario cuando empezó a trabajar 
+        bimestral_contribution = afore.afore_default_contribution(salary) #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
+        months_left_first_group = afore.afore_months_left(age, afore_ages_indexed, month_begin) #meses que estuvo en su primer grupo del AFORE
+
+        first_annual_return = afore_returns_indexed[group_assignment] #retorno anual cuando empezó a trabajar 
+        bimesters_left_first_group = months_left_first_group // 2  #medio mes en cada bimestre, las aportaciones al AFORE son bimestrales. Y solo cuento bimestres completos
+        first_bimestral_return = interest.interest_period_change(first_annual_return, 2)
+
+        #asumiré que las aportaciones se hacen al inicio después de cada bimestre de trabajo. Ejemplo si se trabajo ENERO y FEBREO entonces la aportación se hace el 5 de Marzo.
+        for t in range(0, bimesters_left_first_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
+            afore_total += bimestral_contribution * ((1 + first_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
+
+        current_group = afore.afore_assignment(current_age, afore_ages_indexed) #grupo actual al día de hoy 
+        current_return = afore_returns_indexed[current_group] #current annual return 
+
+        while group_assignment <= 7:  
+            group_assignment += 1 # moverte al sigiente grupo
+            
+            beggining_principal = afore_total #principal al principio de el periodo 
+            new_annual_return = afore_returns_indexed[group_assignment] #retorno anual del siguiente grupo del AFORE
+            new_bimestral_return = interest.interest_period_change(new_annual_return, 2) #nuevo interés bimestral 
+
+            gained_on_principal = beggining_principal * ((1 + new_annual_return/100) ** 5) #cinco años compuesto 
+            bimesters_left_group = 5 * 6 #5 años por grupo después del primero (Básica Inicial) y 6 bimestres por año 
+            bimestral_gain = 0 
+            for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
+                bimestral_gain += bimestral_contribution * ((1 + new_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
+            
+            afore_total = gained_on_principal + bimestral_gain 
+
+        afore_total = round(afore_total, 2)
+        
+        print(f'Actualmente te encuentras en el grupo de {afore_groups[current_group]}. El cual tiene un rendimiento anual promedio de {current_return}%')
+        print(f'Asumiendo que tu ingreso aumente con relación a la inflación, al cumplir los 65 años te retirarás con ${afore_total}MXN')
+    
     salario_minimo = 7568 #el salario minimo por mes en México al 30 de Nov del 2024
     max_aportacion = 7568 * 23 #el tope de aportación contributiva parcial al AFORE en México es 23 veces el salario mínimo
 
-    ########################################################################
-    #AFORE 
-    afore_total = 0 
 
-    group_assignment = afore.afore_assignment(age, afore_ages_indexed) #el grupo del AFORE en el que el usuario se encuentra basado en su edad
-    bimestral_contribution = afore.afore_default_contribution(salary) #la contribución obligatoria y predispuesta (gobierno + empleador + empleado) por bimestre basado en el salario
-    months_left_current_group = afore.afore_months_left(age, afore_ages_indexed, month_now) #años que quedan en el grupo actua; del AFORE
-
-    current_annual_return = afore_returns_indexed[group_assignment]
-    bimesters_left_group = months_left_current_group // 2  #medio mes en cada bimestre, las aportaciones al AFORE son bimestrales. Y solo cuento bimestres completos
-    current_bimestral_return = interest.interest_period_change(current_annual_return, 2)
-
-    #asumiré que las aportaciones se hacen al inicio después de cada bimestre de trabajo. Ejemplo si se trabajo ENERO y FEBREO entonces la aportación se hace el 5 de Marzo.
-    for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
-        afore_total += bimestral_contribution * ((1 + current_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
-
-    original_group = group_assignment
-
-    while group_assignment <= 7:  
-        group_assignment += 1 # moverte al sigiente grupo
-        
-        beggining_principal = afore_total #principal al principio de el periodo 
-        new_annual_return = afore_returns_indexed[group_assignment] #retorno anual del siguiente grupo del AFORE
-        new_bimestral_return = interest.interest_period_change(new_annual_return, 2) #nuevo interés bimestral 
-
-        gained_on_principal = beggining_principal * ((1 + new_annual_return/100) ** 5) #cinco años compuesto 
-        bimesters_left_group = 5 * 6 #5 años por grupo después del primero (Básica Inicial) y 6 bimestres por año 
-        bimestral_gain = 0 
-        for t in range(0, bimesters_left_group): #dada la asunción previa, el rango es del 0 para el bimestre que no tuvo rendimientos (el último) y es -1 la cantidad de bimestres ya que empiezas 2 meses después de empezar el trabajo 
-            bimestral_gain += bimestral_contribution * ((1 + new_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
-        
-        afore_total = gained_on_principal + bimestral_gain 
-
-    afore_total = round(afore_total, 2)
-    
-    print(f'Actualmente te encuentras en el grupo de {afore_groups[original_group]}. El cual tiene un rendimiento anual promedio de {current_annual_return}%')
-    print(f'Asumiendo que tu ingreso aumente con relación a la inflación y contando las aportaciones desde hoy, al cumplir los 65 años te retirarás con ${afore_total}MXN')
     
     
