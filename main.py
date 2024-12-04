@@ -99,13 +99,7 @@ while group_assignment <= 7:
         bimestral_gain += bimestral_contribution * ((1 + new_bimestral_return/100) ** t) #formúla de interés compuesto cada bimestre
     
     afore_total = gained_on_principal + bimestral_gain 
-    
-    print(gained_on_principal)
-    print(bimestral_gain)
-    print(afore_total)
 
-print(new_annual_return)
-print(afore_total)
 
 
 
