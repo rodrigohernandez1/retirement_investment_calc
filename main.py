@@ -16,6 +16,12 @@ name = input("ingrese su nombre\n")
 birth_year = int(input(f'¿En que año naciste {name}? Favor de ingresarlo en formato aaaa\n'))
 age = year_now - birth_year #lo tomé así en vez de directo ya que necesito la edad cumplida al final del año
 #validar entradas 
+while age >= 65: 
+    birth_year = int(input('Esta calculadora no acepta edades mayores que 64 años, lo sentimos. Por favor ingrese una edad válida'))
+    age = year_now - birth_year
+while age < 16: 
+    birth_year = int(input('Tienes que tener 16 años mínimo para empezar a trabajar en México formalmente, favor de ingresar un año válido'))
+    age = year_now - birth_year 
 
 
 
@@ -100,7 +106,9 @@ while group_assignment <= 7:
     afore_total = gained_on_principal + bimestral_gain 
 
 
-print(afore_total)
+print(f'Contando las aportaciones desde hoy, al cumplir los 65 años te retirarás con {afore_total}')
+
+
 
 
 
